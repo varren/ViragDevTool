@@ -1,7 +1,9 @@
+
+### This addon should work after small fixes, but i don't have time to maintain it.
+### So you can use [brittyazel](https://github.com/brittyazel) maintained version/fork/rewrite [DevTool](https://github.com/brittyazel/DevTool),  [Curseforge ](https://legacy.curseforge.com/wow/addons/devtool/files), [Wago](https://addons.wago.io/addons/devtool).
+___
+
 # ViragDevTool Info
-
-This addon shod work after small fixes, but i don't have time to maintain it and dont play wow for quite some time, so you can use [brittyazel](https://github.com/brittyazel) maintained version [DevTool](https://github.com/brittyazel/DevTool),  and is up on [Curseforge ](https://legacy.curseforge.com/wow/addons/devtool/files)and [Wago](https://addons.wago.io/addons/devtool).
-
 ViragDevTool is Lua World of Warcraft addon for addon-developers. 
 Functionality is similar to a debugger. 
 

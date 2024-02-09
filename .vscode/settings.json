@@ -1,0 +1,9 @@
+{
+    "Lua.diagnostics.globals": [
+        "HybridScrollFrame_CreateButtons",
+        "HybridScrollFrame_GetOffset",
+        "HybridScrollFrame_Update",
+        "SlashCmdList",
+        "ColorPickerFrame"
+    ]
+}

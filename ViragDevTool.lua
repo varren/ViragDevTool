@@ -469,6 +469,19 @@ end
 -----------------------------------------------------------------------------------------------
 -- UI
 -----------------------------------------------------------------------------------------------
+
+
+function ViragDevTool:OnUpdate()
+    if self.isUiUpdateEnabled then
+        self:DragResizeColumn(self.wndRef.columnResizer, true)
+        self:UpdateMainTableUI(true)
+        self:UpdateSideBarUI()
+    end
+end
+
+
+
+
 function ViragDevTool:UpdateUI()
     self:UpdateMainTableUI()
     self:UpdateSideBarUI()
@@ -595,7 +608,13 @@ function ViragDevTool:UpdateMainTableUI(force)
 
     HybridScrollFrame_Update(scrollFrame, totalRowsCount * buttons[1]:GetHeight(), scrollFrame:GetHeight());
 
+    -- local scrollWidth = scrollFrame:GetWidth()
+    -- local parentWidth = self.wndRef:GetWidth()
+    -- local scrollChildWidth = scrollFrame.scrollChild:GetWidth()
+    -- print(string.format("Parent: %s, Scroll %s, Child %s", parentWidth, scrollWidth, scrollChildWidth))
+
     scrollFrame.scrollChild:SetWidth(scrollFrame:GetWidth())
+
 end
 
 function ViragDevTool:UpdateScrollFrameRowSize(scrollFrame)
@@ -1051,6 +1070,22 @@ end
 -----------------------------------------------------------------------------------------------
 function ViragDevTool:OnLoad(mainFrame)
     self.wndRef = mainFrame
+
+    self.wndRef.resize:HookScript("OnMouseDown", function()
+        self.isUiUpdateEnabled = true;
+    end)
+    self.wndRef.resize:HookScript("OnMouseUp", function()
+        self.isUiUpdateEnabled = false;
+    end)
+
+    self.wndRef:SetScript("OnUpdate", function()
+        if not self.wndRef:IsVisible() then
+            return
+        end
+        if self.isUiUpdateEnabled then
+            self:OnUpdate()
+        end
+    end)
 
     self.wndRef:RegisterEvent("ADDON_LOADED")
     self.wndRef:RegisterEvent("PLAYER_ENTERING_WORLD") --VARIABLES_LOADED

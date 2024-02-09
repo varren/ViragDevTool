@@ -313,25 +313,32 @@
 
                 ViragDevTool:OnLoad(self)
                 self:SetUserPlaced(true)
-                self:SetMinResize(635, 200);
-                self:SetMaxResize(UIParent:GetWidth(), UIParent:GetHeight());
-                self:RegisterForDrag("LeftButton");
-            </OnLoad>
 
+                self.resize:Init(self, 500, 300, 1100, 800)
+                self:RegisterForDrag("LeftButton");
+
+            </OnLoad>
 
             <OnDragStart>
                 self:StartMoving()
-                -- self.columnResizer:
             </OnDragStart>
-
             <OnDragStop>
-                self.isMoving = false
-                self:StopMovingOrSizing();
+                self:StopMovingOrSizing()
             </OnDragStop>
+
         </Scripts>
         <Frames>
             <!--DRAG-RESIZE CORNER BUTTON-->
-            <Button name="$parentResizeButton" parentKey="resizeButton">
+
+            <Button parentKey="resize" inherits="PanelResizeButtonTemplate">
+                <Size x="16" y="16"/>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                </Anchors>
+            </Button>
+
+
+            <!-- <Button name="$parentResizeButton" parentKey="resizeButton">
                 <Size x="16" y="16"/>
                 <Anchors>
                     <Anchor point="BOTTOMRIGHT" relativeTo="$parent"/>
@@ -374,7 +381,10 @@
                 <NormalTexture file="Interface\ChatFrame\UI-ChatIM-SizeGrabber-Up"/>
                 <HighlightTexture file="Interface\ChatFrame\UI-ChatIM-SizeGrabber-Highlight"/>
                 <PushedTexture file="Interface\ChatFrame\UI-ChatIM-SizeGrabber-Down"/>
-            </Button>
+            </Button> -->
+
+
+
             <!--LABEL FOR FUNCTION ARGUMENTS-->
             <Button text="Arguments:" inherits="ViragDevToolButtonTemplate" name="$parentFNCallLabelButton"
                     parentKey="clearFnArgsButton">
@@ -394,7 +404,8 @@
             <EditBox name="$parentTextArea" inherits="ViragDevToolEditBoxTemplate" autoFocus="false"
                      parentKey="editbox">
                 <Anchors>
-                    <Anchor point="RIGHT" relativeTo="$parentResizeButton" relativePoint="LEFT" x="-14"/>
+                    <Anchor point="RIGHT" relativeKey="$parent.resize" relativePoint="LEFT" x="-14"/>
+                    <!-- <Anchor point="RIGHT" relativeTo="$parentResizeButton" relativePoint="LEFT" x="-14"/> -->
                     <Anchor point="LEFT" relativeTo="$parentFNCallLabelButton" relativePoint="RIGHT" x="10"/>
                 </Anchors>
                 <Scripts>
